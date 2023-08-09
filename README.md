@@ -6,18 +6,18 @@
   - [PCB terv](#pcb-terv)
   - [Megvalósítás](#megvalósítás)
     - [Alsó szint: a vezetékek és SMD](#alsó-szint-a-vezetékek-és-smd)
-    - [Alsó szint: furatszerelt cuccok és átkötések](#alsó-szint-furatszerelt-cuccok-és-átkötések)
+    - [Felső szint: furatszerelt cuccok és átkötések](#felső-szint-furatszerelt-cuccok-és-átkötések)
     - [Végeredmény](#végeredmény)
 
 # Okosmérés, a lakás fogyasztásának mentése
-A modern okosmérők rendelkeznek egy P1 nevű felhasználói porttal, amely igény esetén az ügyfél felé jelzi, hogy mennyi energiát fogyaszt/termel 10 másodpercenkénti bontásban. A hivatalos kommunikáció szerint ezt a portot az ügyfél szabadon használhatja tetszőleges eszközzel. Lássunk is neki az energiafogyasztás naplózásának!
+A modern okosmérők rendelkeznek egy P1 nevű felhasználói porttal, amely képes az aktuális fogyasztási/termelési adatainkat 10 másodperces bontásban a rendelkezésünkre bocsájtani. A hivatalos kommunikáció szerint ezt a portot az ügyfél szabadon használhatja tetszőleges eszközzel. Lássunk is neki az energiafogyasztás naplózásának!
 
 ## Elvi működés:
 
 * az okosmérő 10 másodpercenként soros protokollal küldi a jeleket (UART)
 * egy ESP8266-os mikrovezérlő fogadja az adatokat és WiFi-n az MQTT szerver felé továbbítja
 * az MQTT szervert egy Raspberry Pi biztosítja a lakásban
-* egy szkript segítségével meg az MQTT szerverhez adatait elmentjük napi bontásban
+* egy szkript segítségével meg az MQTT szerverről elmentjük az adatokat CSV fájlokba napi bontásban
 
 Az okosmérő összes adatát továbbküldjük JSON-ná konvertálva. Ez azért fontos, hogy később, ha valamilyen adatra szükség lesz, mindig rendelkezésre álljon, akár több évre visszamenőleg is.
 
@@ -31,7 +31,7 @@ Az okosmérő összes adatát továbbküldjük JSON-ná konvertálva. Ez azért 
 ## Nehézségek a kapcsolásnál
 
 * A dokumentáció maximálisan 250 mA-es áram felvételét engedélyezi a P1 porton, viszont az ESP8266 WiFi használatkor a 300 mA-t simán elérheti. A megoldás egyszerű, egy 1000uF-es kondenzátorral eltároljuk az energiát amikor éppen nem WiFi-zünk és rásegítünk vele, ha szükséges a nagyobb áram. Sokan kihagyják ezt a kapacitást, mert enélkül is megy a cucc, lelkük rajta, személyes tapasztalat alapján valóban megy.
-* A másik nehézség, hogy az okosmérő invertálva küldi az adatokat. Módosítás nélkül az ESP8266 hardveresen képtelen fogadni az adatokat ebben a formában. Sokan szoftveresen orvosolják a bajt, de az ESP8266 azért nem egy teljesítménybajnok mikrovezérlő. A szoftveres UART fogadás nagyságrendekkel rizikósabb a hardveresnél. Szerintem nem a világ vége berakni egy tranzisztort és 2 felhúzó ellenállást, hogy megfordítsuk a logikai jeleket. ESP8266 esetén a WiFi kommunikáció komolyan igénybeveszi a rendszert. Nem biztos, hogy tud egyszerre szoftveresen adatot fogadni és kommunikálni is.
+* A másik nehézség, hogy az okosmérő invertálva küldi az adatokat. Az ESP8266 hardveresen képtelen fogadni az invertált adatokat. Sokan szoftveresen orvosolják a bajt, de ezzel fenntartásaim vannak. Az ESP8266 nem egy teljesítménybajnok mikrovezérlő, a WiFi kommunikáció kimondottan igénybeveszi a rendszert. Könnyen elképzelhető, hogy WiFi-zés alatt kimaradnak bitek és adatvesztés történik. Nem a világ vége berakni egy tranzisztort és 2 felhúzó ellenállást, hogy megfordítsunk egy logikai jelet.
 
 ## A kapcsolási rajz
 
@@ -55,11 +55,11 @@ Le lehet legyártatni a panelt profi cégekkel, bár ezt sosem szoktam csinálni
 
 ### Alsó szint: a vezetékek és SMD
 
-Meglehetősen igénytelen, de a világ végezetéig elműködik. Egy tömör huzalról lehúzom a szigetelést, az lesz a vezeték. Itt-ott azért hozzáforrasztom a panelhez, hogy ne lógjon a vakvilágba. A forrszemeket az SMD1206-nál ki kell kaparni. Egy multiméterrel érdemes megnézni, hogy nincs-e rövidzár valahol.
+Meglehetősen igénytelen, de a világ végezetéig elműködik. Egy tömör huzalról lehúzom a szigetelést, az lesz a vezeték. Itt-ott azért hozzáforrasztom a panelhez, hogy ne lógjon a vakvilágba. A forrszemeket az SMD1206-nál ki kell kaparni. Egy multiméterrel azért érdemes megnézni, hogy nincs-e rövidzár valahol.
 
 ![Alsó szint](documentation/prototype3.png)
 
-### Alsó szint: furatszerelt cuccok és átkötések
+### Felső szint: furatszerelt cuccok és átkötések
 
 Ide rakjuk az átkötéseket és a nagyobb furatszerelt cuccokat.
 
@@ -69,6 +69,6 @@ Ide rakjuk az átkötéseket és a nagyobb furatszerelt cuccokat.
 
 A mikrovezérlőt behelyezzük a dupla foglalatsorba középre, ha pedig mérni támad kedvünk bedughatjuk mellé a mérőkábelt is (ezért a duplasor).
 
-Ha utólag megvilágosodunk, hogy bővíteni kellene a rendszert, a tetejére illesztünk egy másik panelt tüskesor segítségével. Ugye nem muszáj csak az alsó és felső oldalon megépíteni a prototípus panelt, simán mehetünk térben felfelé és lefelé is. :)
+Ha utólag megvilágosodunk, hogy bővíteni kellene a rendszert, a tetejére illesztünk egy másik panelt tüskesorral. Ugye nem muszáj csak az alsó és felső oldalon megépíteni a prototípus panelt, simán mehetünk több emelettel a térben felfelé is és lefelé is. :)
 
 ![Végeredmény](documentation/prototype1.png)
