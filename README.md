@@ -12,6 +12,8 @@
       - [Egy fotó a mérőóráról](#egy-fotó-a-mérőóráról)
   - [Az MQTT adatok elmentése](#az-mqtt-adatok-elmentése)
   - [A webalkalmazás](#a-webalkalmazás)
+    - [A webalkalmazásról](#a-webalkalmazásról)
+    - [A webalkalmazás kipróbálása](#a-webalkalmazás-kipróbálása)
 
 # Okosmérés, a lakás fogyasztásának mentése
 A modern okosmérők rendelkeznek egy P1 nevű felhasználói porttal, amely képes az aktuális fogyasztási/termelési adatainkat 10 másodperces bontásban a rendelkezésünkre bocsájtani. A hivatalos kommunikáció szerint ezt a portot az ügyfél szabadon használhatja tetszőleges eszközzel. Lássunk is neki az energiafogyasztás naplózásának!
@@ -102,4 +104,13 @@ A sok adatból, amit a mérőóra elküld, ennyi bőven elég lesz számunkra.
 
 ## A webalkalmazás
 
+### A webalkalmazásról
+
 TBD
+
+### A webalkalmazás kipróbálása
+
+A githubnak köszönhetően a webalkamazást akár github-ról is demózhatjuk. Érdemes megnyitni a linket és kipróbálni, hogy egy nap adatainál hogyan működik a rendszer.
+
+https://kamutelapo.github.io/smartmeterlogger
+
