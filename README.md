@@ -104,6 +104,8 @@ A sok adatból, amit a mérőóra elküld, ennyi bőven elég lesz számunkra.
 
 ## A webalkalmazás
 
+![A webalkalmazás](documentation/webapp.png)
+
 ### A webalkalmazásról
 
 A webalkalmazás használata egyszerű, telepítjük az Apache2 szervert, a 'raspberry/public_html' tartalmát bemásoljuk a /home/pi/public_html könyvárba, utána http://raspberryipaddress/~pi/smartmeter-ui segítségével érjük el az adatokat.
