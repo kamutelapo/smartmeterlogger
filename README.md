@@ -106,11 +106,11 @@ A sok adatból, amit a mérőóra elküld, ennyi bőven elég lesz számunkra.
 
 ### A webalkalmazásról
 
-TBD
+A webalkalmazás használata egyszerű, telepítjük az Apache2 szervert, a 'raspberry/public_html' tartalmát bemásoljuk a /home/pi/public_html könyvárba, utána http://raspberryipaddress/~pi/smartmeter-ui segítségével érjük el az adatokat.
+A webalkalmazás csak annyit csinál, hogy letölti az adott naphoz tartozó CSV fájlt és kirajzolja, még backend szerverre sincs szükség.
 
 ### A webalkalmazás kipróbálása
 
 A githubnak köszönhetően a webalkamazást akár github-ról is demózhatjuk. Érdemes megnyitni a linket és kipróbálni, hogy egy nap adatainál hogyan működik a rendszer.
 
 https://kamutelapo.github.io/smartmeterlogger
-

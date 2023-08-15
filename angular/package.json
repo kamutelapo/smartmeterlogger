@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href ./",
     "deploy-github": "ng deploy --base-href=https://kamutelapo.github.io/smartmeterlogger/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
