@@ -22,7 +22,7 @@ export class DataDownloadService {
 
     public loadElectricMeterCSV(date: Date): Observable<string> {
         let fileName = formatDate(date, 'yyyy-MM-dd', this.locale) + ".csv"
-        return this.http.get('../rt/eon/' + fileName, {responseType: 'text'});
+        return this.http.get('../rt/sm/' + fileName, {responseType: 'text'});
     }
 
     public parseCSV(data: string, parserConfig: ParserConfig) {
