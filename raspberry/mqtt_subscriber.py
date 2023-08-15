@@ -20,7 +20,7 @@ MQTT_PASS=config['MQTT']['pass']
 MQTT_CLIENT_ID="mymqttclient"
 
 
-RT_BASE_DIR=os.path.dirname(__file__) + "/rt/"
+RT_BASE_DIR=config['OUTPUT']['dir'] + "/rt/"
 SM_RT_DIR=RT_BASE_DIR + "sm"
 LOGS_RT_DIR=RT_BASE_DIR + "logs"
 
