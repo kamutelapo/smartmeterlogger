@@ -82,7 +82,9 @@ Ha utólag megvilágosodunk, hogy bővíteni kellene a rendszert, a tetejére il
 
 #### Egy fotó a mérőóráról
 
-TBD
+A mérőórát tűzi a nap, ezért dobozba raktam, UV álló UTP kábellel.
+
+![Mérőóra](documentation/meter.jpg)
 
 ## Az MQTT adatok elmentése
 
