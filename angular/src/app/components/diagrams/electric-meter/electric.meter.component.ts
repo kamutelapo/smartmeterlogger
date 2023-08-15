@@ -45,8 +45,8 @@ export class ElectricMeterComponent extends CommonChartRealtimeComponent impleme
           let map = this.dataDownloadService.parseCSV(data, this.parserConfig)
 
           if(map) {
-            map['Export'] = map['Export'].map(function(x) { return x * 1000; });
-            map['Import'] = map['Import'].map(function(x) { return x * -1000; });
+            map['Export'] = map['Export'].map(function(x) { return x * -1000; });
+            map['Import'] = map['Import'].map(function(x) { return x * 1000; });
 
             this.totalBackFeed = (map["TotalExport"][map["TotalExport"].length-1] - map["TotalExport"][0]).toFixed(1)
             this.totalConsumption = (map["TotalImport"][map["TotalImport"].length-1] - map["TotalImport"][0]).toFixed(1)
